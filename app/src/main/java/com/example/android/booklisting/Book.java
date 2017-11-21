@@ -8,12 +8,14 @@ public class Book {
 
     private String title;
     private String author;
+    private String url;
     /*
   Constructor
    */
-    public Book(String title, String author){
+    public Book(String title, String author, String url){
         this.title = title;
         this.author = author;
+        this.url = url;
     }
 
      /*
@@ -24,6 +26,8 @@ public class Book {
         return this.title;
     }
     public String getAuthor() { return this.author; }
+    public String getUrl() { return this.url; }
+
 }
 
 

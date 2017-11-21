@@ -166,6 +166,7 @@ public final class Utils {
 
                 JSONObject volumeInfo = singleBook.getJSONObject("volumeInfo");
                 String title = volumeInfo.getString("title");
+                String url = volumeInfo.getString("previewLink");
                 JSONArray authorsArray = volumeInfo.getJSONArray("authors");
 
                // Log.v("books array len: ", "" + title + "\n");
@@ -183,7 +184,7 @@ public final class Utils {
 //
 //                Log.v("book title: ", "" + title);
 
-               books.add(new Book(title, authors));
+               books.add(new Book(title, authors, url));
 
 
             }

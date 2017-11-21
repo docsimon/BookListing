@@ -3,12 +3,15 @@ package com.example.android.booklisting;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -76,23 +79,18 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
             bookListView.setAdapter(bookAdapter);
 
 
-//            bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    Book listItem = (Book) bookListView.getItemAtPosition(position);
-//                    String url = listItem.getUrl();
-//                    // Convert the String URL into a URI object (to pass into the Intent constructor)
-//                    Uri earthquakeUri = Uri.parse(url);
-//
-//                    // Create a new intent to view the earthquake URI
-//                    Intent quakeUrlPage = new Intent(Intent.ACTION_VIEW, earthquakeUri);
-////                Intent quakeUrlPage = new Intent(Intent.ACTION_VIEW);
-////                quakeUrlPage.setData(Uri.parse(url));
-//                    startActivity(quakeUrlPage);
-//                }
-//            });
-
-
+            bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Book listItem = (Book) bookListView.getItemAtPosition(position);
+                    String url = listItem.getUrl();
+                    // Convert the String URL into a URI object (to pass into the Intent constructor)
+                    Uri bookUri = Uri.parse(url);
+                    // Create a new intent to view the earthquake URI
+                    Intent bookUrlPage = new Intent(Intent.ACTION_VIEW, bookUri);
+                    startActivity(bookUrlPage);
+                }
+            });
         }
 
 //
