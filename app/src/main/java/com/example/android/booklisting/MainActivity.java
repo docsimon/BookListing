@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                     // define the intent
                     Intent searchResultIntent = new Intent(MainActivity.this, ResultActivity.class);
                     // passing the search query to the intent
-                    searchResultIntent.putExtra("Result Title", query);
+                    searchResultIntent.putExtra("query", query);
                     // Start the new activity
                     startActivity(searchResultIntent);
                 }
