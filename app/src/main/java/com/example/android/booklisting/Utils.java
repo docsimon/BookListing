@@ -122,15 +122,6 @@ public final class Utils {
      */
     public static List<Book> fetchBooks(String requestUrl) {
 
-
-//
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-
         // Create an empty ArrayList that we can start adding books to
         List<Book> books = new ArrayList<>();
 
@@ -141,7 +132,6 @@ public final class Utils {
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
-
 
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
