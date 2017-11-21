@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <TextView
+            style="@style/MainTitleTextStyle"
+            android:layout_marginBottom="16dp"
+            android:text="@string/main_title"
+            android:textColor="@color/colorPlaceholder" />
 
-            <TextView
-                style="@style/MainTitleTextStyle"
-                android:layout_marginBottom="16dp"
-                android:text="@string/main_title"
-                android:textColor="@color/colorTopTitle" />
+        <EditText
+            android:id="@+id/searchField"
+            style="@style/SearchField"
+            android:hint="@string/search_placeholder"
+            android:textColor="@color/colorPlaceholder" />
 
-            <EditText
-                android:id="@+id/searchField"
-                style="@style/SearchField"
-                android:hint="@string/search_placeholder" />
+        <Button
+            android:id="@+id/search_button"
+            style="@style/SearchButton"
+            android:layout_marginBottom="16dp"
+            android:text="@string/search_button" />
 
-            <Button
-                android:id="@+id/search_button"
-                style="@style/SearchButton"
-                android:layout_marginBottom="16dp"
-                android:text="@string/search_button" />
-
-        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

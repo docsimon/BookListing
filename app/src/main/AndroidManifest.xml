@@ -18,7 +18,7 @@
         </activity>
         <activity
             android:name=".ResultActivity"
-            android:label="@string/search_activity_title"
+            android:label="@string/result_page_title"
             android:parentActivityName=".MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->

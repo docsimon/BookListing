@@ -11,8 +11,9 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         String s = getIntent().getStringExtra("Result Title");
-        TextView mainTitle = (TextView) findViewById(R.id.searchMainTitle);
+        //TextView mainTitle = (TextView) findViewById(R.id.searchMainTitle);
         //String compText =  getResources().getString(R.string.main_title_search, s);
-        mainTitle.setText(s);
+        //mainTitle.setText(s);
+
     }
 }

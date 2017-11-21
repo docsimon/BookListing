@@ -4,10 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:orientation="vertical" />
+
+    <!-- Empty view is only visible when the book list has no items. -->
     <TextView
-        android:id="@+id/searchMainTitle"
-        style="@style/MainTitleTextStyle"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textColor="@color/colorTopTitle" />
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </LinearLayout>
