@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             // The code in this method will be executed when the numbers category is clicked on.
             @Override
             public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
+                // Create a new intent to open the {@link ResultActivity}
 
                 // get the reference and content of the edit
                 EditText searchField = (EditText) findViewById(R.id.searchField);
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void displayAlertMsg() {
         String message = getResources().getString(R.string.search_empty);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

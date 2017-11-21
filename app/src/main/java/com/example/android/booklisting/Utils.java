@@ -67,7 +67,6 @@ public final class Utils {
             return jsonResponse;
         }
 
-
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try {
@@ -86,7 +85,7 @@ public final class Utils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the book JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -150,11 +149,7 @@ public final class Utils {
         try {
 
             JSONObject jsonFile = new JSONObject(jsonResponse);
-           // Log.v("books array len: ", "" + jsonFile);
-
             JSONArray booksArray = jsonFile.getJSONArray("items");
-
-            //Log.v("books array len: ", "" + booksArray);
 
             for (int i = 0; i < booksArray.length(); i++) {
 
@@ -162,43 +157,22 @@ public final class Utils {
                  * get the title and author
                  */
                 JSONObject singleBook = booksArray.getJSONObject(i);
-               // String kinds = singleBook.getString("kind");
-
                 JSONObject volumeInfo = singleBook.getJSONObject("volumeInfo");
                 String title = volumeInfo.getString("title");
                 String url = volumeInfo.getString("previewLink");
                 JSONArray authorsArray = volumeInfo.getJSONArray("authors");
-
-               // Log.v("books array len: ", "" + title + "\n");
-
-                // Log.v("books array : ", "" + booksArray + "\n");
                 String authors = authorsArray.join(", ");
-
-                 //Log.v("authors: ", "" + authors + "\n");
-
-//
-//                JSONObject properties = arrSingleFeature.getJSONObject("volumeInfo");
-//                String title = properties.optString("title");
-//                JSONArray authors = properties.getJSONArray("authors");
-//                String firstAuthor = authors.getString(i);
-//
-//                Log.v("book title: ", "" + title);
-
-               books.add(new Book(title, authors, url));
-
-
+                books.add(new Book(title, authors, url));
             }
-
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("Utils", "Problem parsing the earthquake JSON results", e);
+            Log.e("Utils", "Problem parsing the books JSON results", e);
         }
 
-        // Return the list of earthquakes
+        // Return the list of books
         return books;
     }
-
 }

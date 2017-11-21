@@ -27,24 +27,21 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
     ProgressBar progressBar;
     private static final String BOOK_REQUEST_URL = "https://www.googleapis.com/books/v1/volumes?maxResults=10&q=";
     private String queryString = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         String query = getIntent().getStringExtra("query");
-        //TextView mainTitle = (TextView) findViewById(R.id.searchMainTitle);
-        //String compText =  getResources().getString(R.string.main_title_search, s);
-        //mainTitle.setText(s);
         queryString = BOOK_REQUEST_URL + query;
 
         // Check network connection
         ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
-
 
 
         // create an instance of empty view
@@ -53,12 +50,12 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
         final ListView bookListView = (ListView) findViewById(R.id.list);
         bookListView.setEmptyView(emptyView);
 
-        if (!isConnected){
+        if (!isConnected) {
             emptyView.setText("No Internet Connection.");
             progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
             progressBar.setVisibility(View.GONE);
 
-        }else {
+        } else {
 
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
@@ -69,15 +66,13 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
             loaderManager.initLoader(BOOK_LOADER_ID, null, this);
 
             // Instance of BookAdapter
-            // Create a new {@link ArrayAdapter} of earthquakes
-             bookAdapter = new BookAdapter(this, new ArrayList<Book>());
+            // Create a new {@link ArrayAdapter} of book
+            bookAdapter = new BookAdapter(this, new ArrayList<Book>());
             //bookAdapter = new BookAdapter(this, books);
-
 
             // Set the adapter on the {@link ListView}
             // so the list can be populated in the user interface
             bookListView.setAdapter(bookAdapter);
-
 
             bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -86,42 +81,18 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
                     String url = listItem.getUrl();
                     // Convert the String URL into a URI object (to pass into the Intent constructor)
                     Uri bookUri = Uri.parse(url);
-                    // Create a new intent to view the earthquake URI
+                    // Create a new intent to view the book URI
                     Intent bookUrlPage = new Intent(Intent.ACTION_VIEW, bookUri);
                     startActivity(bookUrlPage);
                 }
             });
         }
-
-//
-//
-//        //create a temp array of books (Book object)
-//        List books = new ArrayList<Book>();
-//
-//        books.add(new Book("TCP/IP Illustated", "Richard Stevens"));
-//        books.add(new Book("Unix Network Programming", "Richard Stevens"));
-//        books.add(new Book("Swift Language", "Apple"));
-//        books.add(new Book("Android", "Google"));
-//        books.add(new Book("TCP/IP Illustated", "Richard Stevens"));
-//        books.add(new Book("Unix Network Programming", "Richard Stevens"));
-//        books.add(new Book("Swift Language", "Apple"));
-//        books.add(new Book("Android", "Google"));
-//        books.add(new Book("TCP/IP Illustated", "Richard Stevens"));
-//        books.add(new Book("Unix Network Programming", "Richard Stevens"));
-//        books.add(new Book("Swift Language", "Apple"));
-//        books.add(new Book("Android", "Google"));
-//
-//
-//
-//
-//
-
     }
 
     @Override
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
-        return new BookLoader(this,queryString);
+        return new BookLoader(this, queryString);
     }
 
     @Override
