@@ -51,7 +51,8 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
         bookListView.setEmptyView(emptyView);
 
         if (!isConnected) {
-            emptyView.setText("No Internet Connection.");
+            String net_problem = getString(R.string.net_status);
+            emptyView.setText(net_problem);
             progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
             progressBar.setVisibility(View.GONE);
 
@@ -99,7 +100,8 @@ public class ResultActivity extends AppCompatActivity implements LoaderCallbacks
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> books) {
         // Clear the adapter of previous data
         bookAdapter.clear();
-        emptyView.setText("No book found...");
+        String empty_list = getString(R.string.empty_list);
+        emptyView.setText(empty_list);
         progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
         progressBar.setVisibility(View.GONE);
 

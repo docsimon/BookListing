@@ -6,5 +6,6 @@
     <string name="search_empty">Insert a book to search, please</string>
     <string name="search_activity_title">Results</string>
     <string name="result_page_title">Book List</string>
-
+    <string name="net_status">No Internet Connection.</string>
+    <string name="empty_list">No book found.</string>
 </resources>
