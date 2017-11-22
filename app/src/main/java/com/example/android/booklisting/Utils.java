@@ -31,6 +31,14 @@ public final class Utils {
      * Tag for the log messages
      */
     public static final String LOG_TAG = Utils.class.getSimpleName();
+    private static final int READ_TIMEOUT = 10000;
+    private static final int CONNECT_TIMEOUT = 15000;
+    private static final int HTTP_SUCCESS = 200;
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_VOLUMEINFO = "volumeInfo";
+    private static final String KEY_AUTHORS = "authors";
+    private static final String KEY_PREVIEWLINK = "previewLink";
+
 
     /**
      * Create a private constructor because no one should ever create a {@link Utils} object.
@@ -71,14 +79,14 @@ public final class Utils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(READ_TIMEOUT /* milliseconds */);
+            urlConnection.setConnectTimeout(CONNECT_TIMEOUT /* milliseconds */);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == HTTP_SUCCESS) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
@@ -137,22 +145,26 @@ public final class Utils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-
+            String authors = "";
             JSONObject jsonFile = new JSONObject(jsonResponse);
-            JSONArray booksArray = jsonFile.getJSONArray("items");
+            JSONArray booksArray = jsonFile.optJSONArray("items");
 
-            for (int i = 0; i < booksArray.length(); i++) {
+            if(booksArray != null) {
+                for (int i = 0; i < booksArray.length(); i++) {
 
-                /**
-                 * get the title and author
-                 */
-                JSONObject singleBook = booksArray.getJSONObject(i);
-                JSONObject volumeInfo = singleBook.getJSONObject("volumeInfo");
-                String title = volumeInfo.getString("title");
-                String url = volumeInfo.getString("previewLink");
-                JSONArray authorsArray = volumeInfo.getJSONArray("authors");
-                String authors = authorsArray.join(", ");
-                books.add(new Book(title, authors, url));
+                    /**
+                     * get the title and author
+                     */
+                    JSONObject singleBook = booksArray.getJSONObject(i);
+                    JSONObject volumeInfo = singleBook.getJSONObject(KEY_VOLUMEINFO);
+                    String title = volumeInfo.getString(KEY_TITLE);
+                    String url = volumeInfo.getString(KEY_PREVIEWLINK);
+                    if(volumeInfo.has(KEY_AUTHORS)) {
+                        JSONArray authorsArray = volumeInfo.getJSONArray(KEY_AUTHORS);
+                        authors = authorsArray.join(", ");
+                    }
+                    books.add(new Book(title, authors, url));
+                }
             }
 
         } catch (JSONException e) {

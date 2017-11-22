@@ -8,4 +8,9 @@
     <string name="result_page_title">Book List</string>
     <string name="net_status">No Internet Connection.</string>
     <string name="empty_list">No book found.</string>
+    <string name="volumeInfo">volumeInfo</string>
+    <string name="title">title</string>
+    <string name="previewLink">previewLink</string>
+    <string name="authors">authors</string>
+
 </resources>
